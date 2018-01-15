@@ -9,7 +9,8 @@ self.addEventListener('connect', function(event) {
 function initPort(port) {
 	port.addEventListener('message', function (event) {
 		quantityMessages++;
-		port.postMessage('Workers conectados -> ' + connectedTimes + ' mensajes -> ' + quantityMessages);
+		var message = 'Workers conectados -> ' + connectedTimes + ' mensajes -> ' + quantityMessages;
+		port.postMessage(message);
 	})
 	port.start();
 }
