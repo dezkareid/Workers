@@ -1,4 +1,3 @@
-var worker;
 var buttonTask = document.getElementById('long-task');
 var buttonTaskWorker = document.getElementById('long-task-worker');
 var buttonMessage = document.getElementById('show-message');
@@ -13,17 +12,14 @@ function longTask() {
 
 function runWorker() {
 	if (!window.Worker ) {
-		console.log('Web Worker no disponible');
+		alert('Web Worker no disponible');
 		return;
 	}
 
-	if (!worker) {
-		worker = new Worker('worker.js');
-		worker.addEventListener('message', function(e) {
-			console.log('Se ha terminado la ejecución del trabajo');
-		}, false);
-	}
-
+	var worker = new Worker('worker.js');
+	worker.addEventListener('message', function(e) {
+		console.log('Se ha terminado la ejecución del trabajo');
+	}, false);
 	worker.postMessage('run');
 }
 
